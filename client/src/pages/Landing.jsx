@@ -11,7 +11,7 @@ const Landing = () => {
             <div className="landing-accent accent-1"></div>
             <div className="landing-accent accent-2"></div>
             <nav className="landing-nav">
-                <div className="nav-logo">VidNotes AI</div>
+                <div className="nav-logo">NoteWise AI</div>
                 <div className="nav-links">
                     <button className="nav-btn" onClick={() => navigate('/login')}>Login</button>
                     <button className="nav-btn primary" onClick={() => navigate('/signup')}>Sign Up</button>
@@ -20,11 +20,11 @@ const Landing = () => {
 
             <header className="landing-hero">
                 <h1 className="hero-title">
-                    Transform YouTube Videos <br />
-                    Into <span className="text-highlight">Smart Study Notes</span>
+                    Turn Any Article Into <br />
+                    <span className="text-highlight">Smart Study Notes</span>
                 </h1>
                 <p className="hero-subtitle">
-                    Paste any YouTube video link and let our AI extract transcripts,
+                    Paste any blog or article URL and let our AI extract key information,
                     generate concise summaries, and create structured study notes in seconds.
                 </p>
                 <div className="hero-actions">
@@ -38,11 +38,12 @@ const Landing = () => {
                     <div className="feature-card">
                         <div className="feature-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
                             </svg>
                         </div>
-                        <h3 className="feature-title">Video Transcript Extraction</h3>
-                        <p className="feature-desc">Automatically extract and process transcripts from any YouTube video with just a link.</p>
+                        <h3 className="feature-title">Article Content Extraction</h3>
+                        <p className="feature-desc">Automatically extract and process content from any blog or article with just a URL.</p>
                     </div>
                     <div className="feature-card">
                         <div className="feature-icon">
@@ -69,7 +70,7 @@ const Landing = () => {
                 </div>
             </section>
             <footer className="landing-footer">
-                <p>© 2026 VidNotes AI. All rights reserved.</p>
+                <p>© 2026 NoteWise AI. All rights reserved.</p>
             </footer>
         </div>
     );

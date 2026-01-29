@@ -9,7 +9,14 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'Server is running properly' });
 });
+
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
 
+const blogRoutes = require("./routes/blog.routes");
+app.use("/api/blog", blogRoutes);
+
 module.exports = app;
+
+
+

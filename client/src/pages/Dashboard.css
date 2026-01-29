@@ -1,0 +1,482 @@
+/* =====================
+   Dashboard Layout
+===================== */
+.dashboard {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background: #0e0f13;
+    color: #ffffff;
+}
+
+/* Background Pattern (matches Landing) */
+.dashboard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: #0e0f13;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 20% 15%, rgba(239, 68, 68, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 85%, rgba(239, 68, 68, 0.08), transparent 45%);
+    background-size:
+        48px 48px,
+        48px 48px,
+        100% 100%,
+        100% 100%;
+    background-position: center;
+    pointer-events: none;
+}
+
+/* =====================
+   Navigation
+===================== */
+.dashboard-nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    margin: 1rem 2rem 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.logout-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* =====================
+   Main Content
+===================== */
+.dashboard-main {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+/* =====================
+   Input Section Card
+===================== */
+.input-section {
+    background: #16171c;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.input-desc {
+    font-size: 1rem;
+    color: #e5e7eb;
+    margin-bottom: 1.5rem;
+}
+
+/* =====================
+   Form Elements
+===================== */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e5e7eb;
+    margin-bottom: 0.5rem;
+}
+
+.url-input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.url-input:focus {
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.url-input::placeholder {
+    color: #6b7280;
+}
+
+/* =====================
+   Error Message
+===================== */
+.error-msg {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* =====================
+   Action Buttons
+===================== */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.summary-btn {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.summary-btn:hover:not(:disabled) {
+    background: #dc2626;
+    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+}
+
+.notes-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.notes-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* =====================
+   Loading Section
+===================== */
+.loading-section {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+}
+
+.spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #ef4444;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-section p {
+    color: #e5e7eb;
+    font-size: 1rem;
+}
+
+/* =====================
+   Result Section
+===================== */
+.result-section {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.75rem;
+}
+
+.result-section h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: #f87171;
+}
+
+/* =====================
+   Tabs
+===================== */
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tab {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #9ca3af;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tab.active {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+.tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* =====================
+   Content Box
+===================== */
+.content-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.75rem;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+/* Scrollbar Styling */
+.content-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-box::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.content-box::-webkit-scrollbar-thumb {
+    background: rgba(239, 68, 68, 0.4);
+    border-radius: 3px;
+}
+
+.content-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(239, 68, 68, 0.6);
+}
+
+/* =====================
+   Markdown Content Styles
+===================== */
+.markdown-content {
+    line-height: 1.8;
+    font-size: 1rem;
+    color: #e5e7eb;
+}
+
+.markdown-content h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(239, 68, 68, 0.3);
+}
+
+.markdown-content h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #f87171;
+    margin: 1.25rem 0 0.75rem 0;
+}
+
+.markdown-content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #fbbf24;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.markdown-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #a78bfa;
+    margin: 0.75rem 0 0.5rem 0;
+}
+
+.markdown-content p {
+    margin: 0.75rem 0;
+    color: #d1d5db;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+}
+
+.markdown-content li {
+    margin: 0.4rem 0;
+    color: #d1d5db;
+}
+
+.markdown-content li::marker {
+    color: #ef4444;
+}
+
+.markdown-content strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.markdown-content em {
+    color: #fbbf24;
+    font-style: italic;
+}
+
+.markdown-content code {
+    background: rgba(239, 68, 68, 0.12);
+    color: #fca5a5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+}
+
+.markdown-content pre {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.markdown-content pre code {
+    background: transparent;
+    padding: 0;
+    color: #e5e7eb;
+}
+
+.markdown-content blockquote {
+    border-left: 4px solid #ef4444;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: #9ca3af;
+    font-style: italic;
+}
+
+.markdown-content hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 1.5rem 0;
+}
+
+.markdown-content a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.markdown-content a:hover {
+    text-decoration: underline;
+}
+
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.markdown-content th {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* =====================
+   Responsive
+===================== */
+@media (max-width: 640px) {
+    .dashboard-nav {
+        padding: 1rem 1.5rem;
+        margin: 0.75rem 1rem 0;
+    }
+
+    .nav-title {
+        font-size: 1.25rem;
+    }
+
+    .dashboard-main {
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+
+    .input-section {
+        padding: 1.5rem;
+    }
+
+    .input-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+
+    .content-box {
+        padding: 1.25rem;
+    }
+}
