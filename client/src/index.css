@@ -4,30 +4,25 @@
   --font-main: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;
   
-  /* Light Theme - Red & White */
   --color-bg: #ffffff;
   --color-surface: #f8f9fa;
   --color-surface-hover: #f1f3f4;
   --color-border: #e5e7eb;
   --color-border-light: #f0f0f0;
   
-  /* Red Primary Colors */
   --color-primary: #dc2626;
   --color-primary-light: #ef4444;
   --color-primary-dark: #b91c1c;
   --color-primary-soft: #fef2f2;
   
-  /* Accent Colors */
   --color-accent: #991b1b;
   --color-accent-soft: #fecaca;
   
-  /* Text Colors */
   --color-text-main: #1f2937;
   --color-text-secondary: #4b5563;
   --color-text-muted: #9ca3af;
   --color-text-light: #ffffff;
   
-  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -113,7 +108,6 @@ a:hover {
   color: var(--color-primary-dark);
 }
 
-/* Primary Button Style */
 .btn-primary {
   background-color: var(--color-primary);
   border: none;
@@ -127,7 +121,6 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
-/* Secondary Button Style */
 .btn-secondary {
   background-color: transparent;
   border: 2px solid var(--color-primary);
@@ -139,7 +132,6 @@ a:hover {
   border-color: var(--color-primary);
 }
 
-/* Utility Classes */
 .text-primary {
   color: var(--color-primary);
 }
@@ -152,17 +144,14 @@ a:hover {
   color: var(--color-text-secondary);
 }
 
-/* Input Styles */
 input, textarea, select {
   font-family: var(--font-main);
 }
 
-/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Selection Color */
 ::selection {
   background-color: var(--color-accent-soft);
   color: var(--color-primary-dark);

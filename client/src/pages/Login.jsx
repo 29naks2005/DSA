@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import api from '../api';
 import './Login.css';
 
@@ -28,10 +29,13 @@ const Login = () => {
     return (
         <div className="login-container">
             <div className="login-right-panel">
+                <button className="back-btn" onClick={() => navigate('/')}>
+                    <ArrowLeft size={18} /> Back
+                </button>
                 <div className="login-form-wrapper">
                     <h2 className="login-title">Welcome back</h2>
                     <p className="login-subtitle">
-                        Sign in to continue to <strong>VidNotes AI</strong>
+                        Sign in to continue to <strong>NoteWise AI</strong>
                     </p>
 
                     <form className="login-form" onSubmit={handleSubmit}>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import api from '../api';
 import './Signup.css';
 
@@ -27,10 +28,13 @@ const Signup = () => {
     return (
         <div className="signup-container">
             <div className="signup-right-panel">
+                <button className="back-btn" onClick={() => navigate('/')}>
+                    <ArrowLeft size={18} /> Back
+                </button>
                 <div className="signup-form-wrapper">
                     <h2 className="signup-title">Create account</h2>
                     <p className="signup-subtitle">
-                        Join <strong>VidNotes AI</strong> to get started
+                        Join <strong>NoteWise AI</strong> to get started
                     </p>
 
                     <form className="signup-form" onSubmit={handleSubmit}>

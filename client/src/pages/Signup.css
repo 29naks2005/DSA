@@ -23,8 +23,31 @@
 .signup-right-panel {
     z-index: 1;
     width: 100%;
+    max-width: 420px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
 }
 
 .signup-form-wrapper {
