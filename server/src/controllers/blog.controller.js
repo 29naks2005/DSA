@@ -1,6 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const axios = require("axios");
 const cheerio = require("cheerio");
+const prisma = require("../prismaClient");
 
 /* ================= CONFIG ================= */
 
@@ -164,7 +165,7 @@ If needed, add 1–2 bullet points for clarity.
 
 ## 🔁 Quick Revision
 - Very short bullets summarizing the whole topic
-- Think “last-minute revision”
+- Think "last-minute revision"
 
 ## ❓ Common Confusions
 - Clarify things beginners often misunderstand (only if present in article)
@@ -230,8 +231,107 @@ const processBlog = async (req, res) => {
   }
 };
 
+// Save a note
+const saveNote = async (req, res) => {
+  try {
+    const { articleUrl, articleTitle, content, type } = req.body;
+    const userId = req.user.userId;
+
+    if (!articleUrl || !content || !type) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    if (!["summary", "notes"].includes(type)) {
+      return res.status(400).json({ message: "Type must be 'summary' or 'notes'" });
+    }
+
+    const savedNote = await prisma.savedNote.create({
+      data: {
+        userId,
+        articleUrl,
+        articleTitle: articleTitle || "Untitled Article",
+        content,
+        type,
+      },
+    });
+
+    res.json({ message: "Note saved successfully", data: savedNote });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Get all saved notes for user
+const getSavedNotes = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const notes = await prisma.savedNote.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        articleTitle: true,
+        articleUrl: true,
+        type: true,
+        createdAt: true,
+      },
+    });
+
+    res.json({ notes });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Get single saved note by ID
+const getSavedNoteById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    const note = await prisma.savedNote.findFirst({
+      where: { id, userId },
+    });
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    res.json({ note });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+// Delete a saved note
+const deleteSavedNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    const note = await prisma.savedNote.findFirst({
+      where: { id, userId },
+    });
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    await prisma.savedNote.delete({ where: { id } });
+
+    res.json({ message: "Note deleted successfully" });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 module.exports = {
   getBlogSummary,
   getBlogNotes,
   processBlog,
+  saveNote,
+  getSavedNotes,
+  getSavedNoteById,
+  deleteSavedNote,
 };

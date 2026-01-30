@@ -7,24 +7,24 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
 model User {
   id        String   @id @default(uuid())
   name      String
   email     String   @unique
   password  String
-  notes     Note[]
+  notes     SavedNote[]
   createdAt DateTime @default(now())
 }
-model Note {
-  id         String   @id @default(uuid())
-  userId     String
-  videoId    String
-  videoTitle String
-  summary    String
-  notes      String
-  timestamps Json
-  createdAt  DateTime @default(now())
+
+model SavedNote {
+  id           String   @id @default(uuid())
+  userId       String
+  articleUrl   String
+  articleTitle String
+  content      String   @db.Text
+  type         String   // "summary" or "notes"
+  createdAt    DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
