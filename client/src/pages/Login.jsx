@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import api from '../api';
 import './Login.css';
 
 const Login = () => {
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setLoading(true);
 
         const email = e.target.email.value;
         const password = e.target.password.value;
@@ -23,6 +26,8 @@ const Login = () => {
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -50,6 +55,7 @@ const Login = () => {
                                     className="form-input"
                                     placeholder="name@example.com"
                                     required
+                                    disabled={loading}
                                 />
                             </div>
                         </div>
@@ -63,17 +69,24 @@ const Login = () => {
                                     className="form-input"
                                     placeholder="••••••••"
                                     required
+                                    disabled={loading}
                                 />
                             </div>
                         </div>
 
-                        <button type="submit" className="login-btn">
-                            Sign In
+                        <button type="submit" className="login-btn" disabled={loading}>
+                            {loading ? (
+                                <>
+                                    <Loader2 size={18} className="spin" /> Signing in...
+                                </>
+                            ) : (
+                                'Sign In'
+                            )}
                         </button>
                     </form>
 
                     <div className="login-footer">
-                        Don’t have an account?
+                        Don't have an account?
                         <Link to="/signup" className="login-link">
                             Create account
                         </Link>

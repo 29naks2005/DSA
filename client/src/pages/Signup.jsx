@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import api from '../api';
 import './Signup.css';
 
 const Signup = () => {
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+        setLoading(true);
 
         const name = e.target.name.value;
         const email = e.target.email.value;
@@ -19,9 +22,14 @@ const Signup = () => {
             await api.post('/auth/signup', { name, email, password });
             const { data } = await api.post('/auth/login', { email, password });
             localStorage.setItem('token', data.token);
+            if (data.user?.name) {
+                localStorage.setItem('userName', data.user.name);
+            }
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Signup failed. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -48,6 +56,7 @@ const Signup = () => {
                                 className="form-input"
                                 placeholder="John Doe"
                                 required
+                                disabled={loading}
                             />
                         </div>
 
@@ -59,6 +68,7 @@ const Signup = () => {
                                 className="form-input"
                                 placeholder="name@example.com"
                                 required
+                                disabled={loading}
                             />
                         </div>
 
@@ -70,11 +80,18 @@ const Signup = () => {
                                 className="form-input"
                                 placeholder="Create a strong password"
                                 required
+                                disabled={loading}
                             />
                         </div>
 
-                        <button type="submit" className="signup-btn">
-                            Create Account
+                        <button type="submit" className="signup-btn" disabled={loading}>
+                            {loading ? (
+                                <>
+                                    <Loader2 size={18} className="spin" /> Creating account...
+                                </>
+                            ) : (
+                                'Create Account'
+                            )}
                         </button>
                     </form>
 
