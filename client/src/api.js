@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api', // Make sure this matches your server port
+    baseURL: 'https://dsa-k67q.onrender.com/api', 
 });
 
 export default api;
