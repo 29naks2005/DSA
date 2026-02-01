@@ -20,6 +20,7 @@ const SavedNotes = () => {
     const [savedNotes, setSavedNotes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [viewingNote, setViewingNote] = useState(null);
+    const [viewingLoading, setViewingLoading] = useState(false); // ✅ added
     const [error, setError] = useState('');
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [userName, setUserName] = useState('');
@@ -29,7 +30,6 @@ const SavedNotes = () => {
 
     useEffect(() => {
         fetchSavedNotes();
-        // Get user info from localStorage or token
         const storedName = localStorage.getItem('userName');
         if (storedName) {
             setUserName(storedName);
@@ -43,7 +43,6 @@ const SavedNotes = () => {
         }
     }, []);
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -68,14 +67,20 @@ const SavedNotes = () => {
         }
     };
 
+    // ✅ logic-only change
     const handleViewNote = async (id) => {
+        if (viewingLoading) return;
+
         try {
+            setViewingLoading(true);
             const { data } = await api.get(`/blog/saved/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setViewingNote(data.note);
         } catch {
             setError('Failed to load note');
+        } finally {
+            setViewingLoading(false);
         }
     };
 
@@ -100,9 +105,8 @@ const SavedNotes = () => {
         navigate('/login');
     };
 
-    const getUserInitial = () => {
-        return userName ? userName.charAt(0).toUpperCase() : 'U';
-    };
+    const getUserInitial = () =>
+        userName ? userName.charAt(0).toUpperCase() : 'U';
 
     const formatDate = (dateString) =>
         new Date(dateString).toLocaleDateString('en-US', {
@@ -187,9 +191,12 @@ const SavedNotes = () => {
                                 {savedNotes.map((note) => (
                                     <div
                                         key={note.id}
-                                        className={`note-card ${viewingNote?.id === note.id ? 'active' : ''
-                                            }`}
-                                        onClick={() => handleViewNote(note.id)}
+                                        className={`note-card ${
+                                            viewingNote?.id === note.id ? 'active' : ''
+                                        }`}
+                                        onClick={() =>
+                                            !viewingLoading && handleViewNote(note.id)
+                                        }
                                     >
                                         <div className="note-card-header">
                                             <span className="note-type-badge">
@@ -230,7 +237,13 @@ const SavedNotes = () => {
                         )}
                     </div>
 
-                    {Boolean(viewingNote) ? (
+                    {viewingLoading ? (
+                        <div className="note-viewer">
+                            <div className="viewer-content">
+                                <p>Loading your note...</p>
+                            </div>
+                        </div>
+                    ) : viewingNote ? (
                         <div className="note-viewer">
                             <div className="viewer-header">
                                 <div>

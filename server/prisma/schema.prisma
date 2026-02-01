@@ -23,7 +23,7 @@ model SavedNote {
   articleUrl   String
   articleTitle String
   content      String   @db.Text
-  type         String   // "summary" or "notes"
+  type         String   
   createdAt    DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
