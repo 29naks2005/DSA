@@ -23,7 +23,6 @@ const Dashboard = () => {
     const authHeaders = { headers: { Authorization: `Bearer ${token}` } };
 
     useEffect(() => {
-        // Get user info from localStorage or token
         const storedName = localStorage.getItem('userName');
         if (storedName) {
             setUserName(storedName);
@@ -37,7 +36,6 @@ const Dashboard = () => {
         }
     }, [token]);
 
-    // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {

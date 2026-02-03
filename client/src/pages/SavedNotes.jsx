@@ -67,7 +67,6 @@ const SavedNotes = () => {
         }
     };
 
-    // ✅ logic-only change
     const handleViewNote = async (id) => {
         if (viewingLoading) return;
 
