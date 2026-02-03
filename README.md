@@ -100,7 +100,7 @@ This ensures:
 client/
  ├── components/
  ├── pages/
- ├── services/
+ ├── utlis/
  └── App.jsx
 
 server/
